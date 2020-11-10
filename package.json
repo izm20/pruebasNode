@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dice": "node dice.js",
-    "customdice": "node customdice.js",
-    "words": "node words.js"
+    "start": "node src/server.js",
+    "dice": "node src/dice.js",
+    "customdice": "node src/customdice.js",
+    "words": "node src/words.js"
   },
   "keywords": [],
   "author": "",

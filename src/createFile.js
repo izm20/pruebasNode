@@ -1,7 +1,7 @@
 const fs = require("fs")
 const { appendFile, readFile, unlink } = require("fs").promises
 const file = process.argv[2];
-const filePath = "./items.txt";
+const filePath = "src/assets/items.txt";
 
 main(file, filePath);
 
