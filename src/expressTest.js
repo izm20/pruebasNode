@@ -1,20 +1,50 @@
 const express = require("express");
 const app = express();
-const users = [{id: 1, name: "Pepe"}, {id: 2, name: "Juan"}];
+const users = [{ id: 1, name: "Pepe" }, { id: 2, name: "Juan" }];
+const MIN_FACES = 1;
+const DEFAULT_FACES = 6;
 
-app.get('/users/:id', (req, res) => {
-  const userId = Number(req.params.id);
+app.use(express.json());
+
+const  throwDice = (faces = DEFAULT_FACES) => 
+  MIN_FACES + Math.floor(Math.random() * faces);
+
+const jsonResponse  = (result, faces = DEFAULT_FACES) => ({
+  min: MIN_FACES,
+  max: faces,
+  result: result
+});
+
+app.post('/users', ({body}, res) => {
+  const newUser = body;
+  newUser.id = throwDice(100);
+  users.push(newUser);
+  res.json(newUser);
+});
+
+app.get('/dice/:faces', ({params}, res) => {
+  const faces = Number(params.faces);
+  const diceResult = throwDice(faces);
+  res.json(jsonResponse(diceResult));
+});
+
+app.get('/dice', ({params}, res) => {
+  const diceResult = throwDice();
+  res.json(jsonResponse(diceResult));
+});
+
+app.get('/users/:id', ({params}, res) => {
+  const userId = Number(params.id);
   const user = users.find(user => user.id === userId);
   res.json(user);
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', ({params}, res) => {
   res.json(users);
 });
 
-
-app.get("/test", (req, res) => {
-  users[0].name = "Imar";  
+app.get("/test", ({params}, res) => {
+  users[0].name = "Imar";
   res.json(users[0]);
 });
 
