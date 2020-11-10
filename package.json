@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "dice": "node src/dice.js",
     "customdice": "node src/customdice.js",
-    "words": "node src/words.js"
+    "words": "node src/words.js",
+    "server": "node src/expressTest.js"
   },
   "keywords": [],
   "author": "",
